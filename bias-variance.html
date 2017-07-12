@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+</head>
+
+<body>
+  <div id="body">
+    <h2 id="content_1_0">バイアス-バリアンス</h2>
+    <p>モデル \(Y=f(X)+\varepsilon\) から訓練サンプル集合 \(T\) が生成されたとする．<br>
+	ただし，\(\varepsilon\) は正規分布 \(N(0,\sigma^2)\) に従う真のエラー項．
+	この訓練サンプル集合から \(\hat{f}(x)\) を推定したとする．</p>
+
+	<p>このとき，点 \(x\) の<!--autolink--><a href="http://ibisforest.org/index.php?%E6%B1%8E%E5%8C%96%E8%AA%A4%E5%B7%AE" title="汎化誤差 (1248d)">汎化誤差</a><!--/autolink-->を最小2乗で測ると
+
+\[\mathrm{E}[(Y-\hat{f}(x))^2|X=x]=\sigma^2+\Bigl(\mathrm{E}_T[\hat{f}(x)]-f(x)\Bigr)^2+{\mathrm{E}_T}\bigl[(\hat{f}(x)-\mathrm{E}_T[\hat{f}(x)])^2\bigr]\]
+\[=\sigma^2+{\mathrm{Bias}}^2[\hat{f}(x)]+\mathrm{Var}_T[\hat{f}(x)]\]
+
+ただし，\(\mathrm{E}\) は真の\(x\)の分布についてとった期待値，
+\(\mathrm{E}_T\) はいろいろな訓練サンプル集合上の分布についてとった平均．
+	</p>
+
+<ul class="list1" style="padding-left:16px;margin-left:16px">
+	<li>第1項は，削減不能な誤差</li>
+	<li>第2項は，真の平均 \(f(x)\) と推定値の期待値 \(\mathrm{E}_T[\hat{f}(x)]\) の差であるバイアス(bias)の2乗．<br>
+		このモデルを使って推定したときの平均的な推定値と真の値との差を測る．</li>
+	<li>第3項は，訓練サンプルの違いに由来するランダムさを表すバリアンス．<br>
+		すなわち，特定のサンプルに基づいた推定値の，
+		それらをいろいろなサンプルについてとった期待値の周りで求めた分散．</li>
+</ul>
+
+<p>第2項と第3項は推定に使ったモデルで変えることができるが，次のトレードオフがある．</p>
+<ul class="list1" style="padding-left:16px;margin-left:16px">
+	<li>線形など単純なモデルでは，バイアスは大きくなるが，バリアンスは小さくなる</li>
+	<li>高次の複雑なモデルでは，バイアスは小さくなるが，バリアンスは大きくなる</li>
+</ul>
+<p>このようなトレードオフがあるので，バイアスとバリアンスの和が小さくなるようにモデル
+	を選ぶ必要がある．</p>
+  </div>
+</body>
+</html>
